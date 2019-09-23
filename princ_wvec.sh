@@ -4,13 +4,16 @@
 # project Principla Word Vectors at http://urn.kb.se/resolve?urn=urn:nbn:se:uu:diva-353866
 # You are allowed to modify or distribute it if you keep this header part
 #
-# MT before running this from the terminal
+# MT before running this from the terminal for the first time
+# pip3 install numpy
+# pip3 install scipy 
 # cd cwvec
 # make
 #
 # if raw, it is fine as long as the words are separated by spaces
 #
 
+#DATA_PREFIX=./cwvec/test/corpus.data <- can change to this if needed.
 DATA_PREFIX=./corpus # raw dep_index or raw
 CORPUS=${DATA_PREFIX}
 
@@ -47,6 +50,7 @@ $CWVEC --input $CORPUS --output $CMAT \
   --vocab $VOCAB --min-vcount $MIN_VCOUNT \
   --feature $FEATURE  \
   --symmetric \
+  # this line normalize can be removed if you run on Chinese
   --normalize \
   --max-memory $MEM --verbose
 
