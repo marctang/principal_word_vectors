@@ -4,6 +4,11 @@
 # project Principla Word Vectors at http://urn.kb.se/resolve?urn=urn:nbn:se:uu:diva-353866
 # You are allowed to modify or distribute it if you keep this header part
 #
+# MT before running this from the terminal
+# cd cwvec
+# make
+#
+# if raw, it is fine as long as the words are separated by spaces
 #
 
 DATA_PREFIX=./corpus # raw dep_index or raw
@@ -14,7 +19,8 @@ WORD_VECTORS=${DATA_PREFIX}.wvec
 EMBEDDINGS=${DATA_PREFIX}.wembed
 
 CORPUS_TYPE=annotated # raw or annotated
-CONTEXT_TYPE=bow # bow or pow or indexed
+CONTEXT_TYPE=bow # or pow position-of-words or indexed, bow bag-of-words means the order does not count
+
 
 MEM=4
 
@@ -24,6 +30,7 @@ MIN_VCOUNT=100
 FEATURE=${DATA_PREFIX}.feat
 #MIN_FCOUNT=100 # only with annotated corpora
 
+# set +5 for words after the center, set -5 for the preceding words (e.g., I [want] an apple, I is -1
 WINDOW=1
 
 CWVEC=cwvec/build/cwvec
