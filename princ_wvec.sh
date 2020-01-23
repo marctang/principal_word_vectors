@@ -13,28 +13,29 @@
 # if raw, it is fine as long as the words are separated by spaces
 #
 
-#DATA_PREFIX=./cwvec/test/corpus.data <- can change to this if needed.
-DATA_PREFIX=./corpus # raw dep_index or raw
+
+DATA_PREFIX=./cwvec/test/corpus.data.txt #<- can change to this if needed.
+#DATA_PREFIX=./corpus # raw dep_index or raw
 CORPUS=${DATA_PREFIX}
 
 CMAT=${DATA_PREFIX}.bin
 WORD_VECTORS=${DATA_PREFIX}.wvec
 EMBEDDINGS=${DATA_PREFIX}.wembed
 
-CORPUS_TYPE=annotated # raw or annotated
+CORPUS_TYPE=raw # raw or annotated
 CONTEXT_TYPE=bow # or pow position-of-words or indexed, bow bag-of-words means the order does not count
 
 
 MEM=4
 
 VOCAB=${DATA_PREFIX}.vcb
-MIN_VCOUNT=100
+MIN_VCOUNT=10
 
 FEATURE=${DATA_PREFIX}.feat
 #MIN_FCOUNT=100 # only with annotated corpora
 
 # set +5 for words after the center, set -5 for the preceding words (e.g., I [want] an apple, I is -1
-WINDOW=1
+WINDOW=5
 
 CWVEC=cwvec/build/cwvec
 PWVEC=pwvec/python/pwvec.py
@@ -51,7 +52,7 @@ $CWVEC --input $CORPUS --output $CMAT \
   --feature $FEATURE  \
   --symmetric \
   # this line normalize can be removed if you run on Chinese
-  --normalize \
+  #--normalize \
   --max-memory $MEM --verbose
 
 if [ $? -ne 0 ]; then echo "error while running cwvec "; fi
